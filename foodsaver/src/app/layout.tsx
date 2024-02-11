@@ -33,10 +33,15 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <html className="flex justify-center">
-      <body className="sm:w-[640px]">
-        <Header />
-        {children}
+    <html className="flex justify-center bg-white">
+      <body className="w-full sm:w-[640px] bg-white">
+        <div className=" fixed top-0 w-full sm:w-[640px] z-0">
+          <Header />
+        </div>
+        <div className="mt-20 px-5 sm:px-20">
+          {children}
+        </div>
+
 
 
       </body>

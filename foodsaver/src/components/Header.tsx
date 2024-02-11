@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Header = () => {
     const [clickMenu, setClickMenu] = useState<boolean>(false)
@@ -11,17 +11,19 @@ const Header = () => {
         setClickBookmark(bool)
         console.log(bool)
     }
-    return (
-        <div className="p-5 flex items-center justify-between">
+    // useEffect(() => {
 
-            <div className='dropdown relative '>
+    // }, [clickMenu])
+    return (
+        <div className="p-5 flex items-center justify-between w-full bg-white">
+            <div className='dropdown bg-white z-10'>
                 <div onClick={onClickMenu} tabIndex={0} role="button" className=''>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                     </svg>
                 </div>
 
-                <ul tabIndex={0} className="z-[1] menu dropdown-content rounded-box absolute top-7 p-5 py-3  w-56 shadow-xl text-xl space-y-3">
+                <ul tabIndex={0} className="z-10 menu dropdown-content rounded-box  top-7 p-5 py-3  w-56 shadow-xl text-xl space-y-3">
                     <li><a>레시피 생성하기</a></li>
                     <li><a>커뮤니티</a></li>
                     <li><a>내 근처 푸드뱅크</a></li>
