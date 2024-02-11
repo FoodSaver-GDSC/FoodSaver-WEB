@@ -1,12 +1,10 @@
 "use client";
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
 const Header = () => {
-    const [clickMenu, setClickMenu] = useState<boolean>(false)
     const [clickBookmark, setClickBookmark] = useState<boolean>(false)
-    const onClickMenu = () => {
-        setClickMenu(prev => !prev)
-    }
+
     const onClickBookmark = (bool: boolean) => {
         setClickBookmark(bool)
         console.log(bool)
@@ -15,20 +13,16 @@ const Header = () => {
 
     // }, [clickMenu])
     return (
-        <div className="p-5 flex items-center justify-between w-full bg-white">
-            <div className='dropdown bg-white z-10'>
-                <div onClick={onClickMenu} tabIndex={0} role="button" className=''>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                    </svg>
+        <div className="navbar p-5 flex items-center justify-between w-full bg-white">
+            <div className="dropdown">
+                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
                 </div>
-
-                <ul tabIndex={0} className="z-10 menu dropdown-content rounded-box  top-7 p-5 py-3  w-56 shadow-xl text-xl space-y-3">
-                    <li><a>레시피 생성하기</a></li>
+                <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[10000] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><Link href={"/"}>레시피 생성하기</Link></li>
                     <li><a>커뮤니티</a></li>
                     <li><a>내 근처 푸드뱅크</a></li>
                 </ul>
-
             </div>
             <div className="font-bold text-2xl">
                 <span className="text-mainColor">Food</span>

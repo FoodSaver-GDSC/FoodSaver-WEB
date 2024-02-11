@@ -2,7 +2,8 @@
 import Image from "next/image";
 import Layout from "./layout";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from 'next/navigation'
 
 type FormValues = {
   ingred: string
@@ -16,11 +17,12 @@ type ingredient = {
 export default function Home() {
   const { register, handleSubmit, reset } = useForm<FormValues>()
   const [ingredients, setIngredients] = useState<ingredient[]>([])
+  const router = useRouter();
 
   const onValid: SubmitHandler<FormValues> = ({ ingred }) => {
     if (ingred) {
       const ingredient = {
-        id: Math.random(),
+        id: ingredients?.length + 1,
         name: ingred
       }
       setIngredients((prev) => [
@@ -29,14 +31,23 @@ export default function Home() {
       ])
       reset()
     }
-    console.log(ingredients)
   }
 
   const deleteIng = (id: number) => {
     console.log(id)
     setIngredients(ingredients.filter((ingre) => ingre.id !== id))
-
   }
+
+  const onClickMakeRecipe = () => {
+
+    router.push(`/recipes/${"0123"}`)
+  }
+
+  useEffect(() => {
+    // 여기에서 라우터를 사용하거나 초기화가 완료되었을 때 수행해야 하는 작업 수행
+  }, [router.isReady]); // isReady 속성을 사용하여 라우터 초기화 여부 확인
+
+
   return (
     <div className="" >
       <form onSubmit={handleSubmit(onValid)} className="w-full">
@@ -68,7 +79,7 @@ export default function Home() {
 
       </form>
 
-      <div className="flex justify-center">
+      <div onClick={onClickMakeRecipe} className="flex justify-center">
         <button className=" btn bg-white border rounded-full px-6 border-mainColor text-mainColor hover:bg-mainColor hover:text-white hover:border-mainColor">레시피 생성하기</button>
       </div>
     </div>

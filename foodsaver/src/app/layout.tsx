@@ -38,7 +38,7 @@ export default function Layout({
         <div className=" fixed top-0 w-full sm:w-[640px] z-0">
           <Header />
         </div>
-        <div className="mt-20 px-5 sm:px-20">
+        <div className="mt-28 px-5 sm:px-20">
           {children}
         </div>
 
