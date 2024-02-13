@@ -6,6 +6,7 @@ const Header = () => {
     const [clickBookmark, setClickBookmark] = useState<boolean>(false)
 
     const onClickBookmark = (bool: boolean) => {
+        alert("로그인이 필요합니다!")
         setClickBookmark(bool)
         console.log(bool)
     }

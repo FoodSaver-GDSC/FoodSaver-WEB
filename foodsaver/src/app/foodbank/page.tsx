@@ -9,11 +9,11 @@ interface FormData {
     search: string;
 }
 const address = [
-    { center: "전국푸드뱅크", area: "중앙", detail: "서울특별시 마포구 만리재로 14 한국사회복지회관 1201호" },
-    { center: "전국푸드뱅크", area: "중앙", detail: "서울특별시 마포구 만리재로 14 한국사회복지회관 1201호" },
-    { center: "전국푸드뱅크", area: "중앙", detail: "서울특별시 마포구 만리재로 14 한국사회복지회관 1201호" },
-    { center: "전국푸드뱅크", area: "중앙", detail: "서울특별시 마포구 만리재로 14 한국사회복지회관 1201호" },
-    { center: "전국푸드뱅크", area: "중앙", detail: "서울특별시 마포구 만리재로 14 한국사회복지회관 1201호" },
+    { center: "전국푸드뱅크", area: "중앙", detail: "서울특별시 마포구 만리재로 14 한국사회복지회관 1201호", phone: "02-2077-3985" },
+    { center: "전국푸드뱅크", area: "중앙", detail: "서울특별시 마포구 만리재로 14 한국사회복지회관 1201호", phone: "02-2077-3985" },
+    { center: "전국푸드뱅크", area: "중앙", detail: "서울특별시 마포구 만리재로 14 한국사회복지회관 1201호", phone: "02-2077-3985" },
+    { center: "전국푸드뱅크", area: "중앙", detail: "서울특별시 마포구 만리재로 14 한국사회복지회관 1201호", phone: "02-2077-3985" },
+    { center: "전국푸드뱅크", area: "중앙", detail: "서울특별시 마포구 만리재로 14 한국사회복지회관 1201호", phone: "02-2077-3985" },
 
 ]
 const page = () => {
@@ -37,7 +37,7 @@ const page = () => {
                     <form onSubmit={handleSubmit(onValid)} className='relative'>
                         <input {...register("search")} className='input input-bordered w-full' />
                         <button>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6 text-mainColor absolute right-5 top-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 text-mainColor absolute right-5 top-3">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                             </svg>
                         </button>
@@ -51,15 +51,17 @@ const page = () => {
                                     <th>센터명</th>
                                     <th>지역</th>
                                     <th>상세주소</th>
+                                    <th>전화번호</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {address?.map((a, i) =>
-                                    <tr className=''>
+                                    <tr key={i} className=''>
                                         <th>{i + 1}</th>
                                         <td>{a.center}</td>
                                         <td>{a.area}</td>
                                         <td>{a.detail}</td>
+                                        <td>{a.phone}</td>
                                     </tr>
                                 )}
                             </tbody>
