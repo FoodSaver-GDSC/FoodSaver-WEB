@@ -43,10 +43,6 @@ export default function Home() {
     router.push(`/recipes/${"0123"}`)
   }
 
-  useEffect(() => {
-    // 여기에서 라우터를 사용하거나 초기화가 완료되었을 때 수행해야 하는 작업 수행
-  }, [router.isReady]); // isReady 속성을 사용하여 라우터 초기화 여부 확인
-
 
   return (
     <div className="" >
@@ -68,7 +64,7 @@ export default function Home() {
                 <div>
                   {ingre.name}
                 </div>
-                <div onClick={() => deleteIng(ingre.id)} className="btn btn-xs btn-circle btn-outline border-borderColor text-borderColor ">
+                <div onClick={() => deleteIng(ingre.id)} className="opacity-30 hover:opacity-100 btn btn-xs btn-circle btn-outline border-borderColor text-borderColor ">
                   x
                 </div>
 

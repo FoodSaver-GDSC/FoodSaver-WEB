@@ -13,16 +13,28 @@ const Header = () => {
 
     // }, [clickMenu])
     return (
-        <div className="navbar p-5 flex items-center justify-between w-full bg-white">
+        <div className="navbar p-5 flex items-center justify-between w-full bg-white z-10">
             <div className="dropdown">
                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
                 </div>
                 <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[10000] p-2 shadow bg-base-100 rounded-box w-52">
                     <li><Link href={"/"}>레시피 생성하기</Link></li>
-                    <li><a>커뮤니티</a></li>
-                    <li><a>내 근처 푸드뱅크</a></li>
+                    <li><a onClick={() => document.getElementById('my_modal_1').showModal()}>커뮤니티</a></li>
+                    <li><Link href="/foodbank">내 근처 푸드뱅크</Link></li>
                 </ul>
+
+                <dialog id="my_modal_1" className="modal">
+                    <div className="modal-box">
+                        <p className="py-4">준비 중인 기능입니다!</p>
+                        <div className="modal-action">
+                            <form method="dialog">
+                                {/* if there is a button in form, it will close the modal */}
+                                <button className="btn">Close</button>
+                            </form>
+                        </div>
+                    </div>
+                </dialog>
             </div>
             <div className="font-bold text-2xl">
                 <span className="text-mainColor">Food</span>
