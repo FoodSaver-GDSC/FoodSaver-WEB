@@ -1,5 +1,17 @@
 "use client"
 
+declare global {
+    interface Window {
+        google: {
+            maps: {
+                Map: any;
+                Marker: any;
+                // Add other types as needed
+            };
+        };
+    }
+}
+
 import React, { useEffect } from 'react';
 
 const GoogleMap = () => {
@@ -9,14 +21,14 @@ const GoogleMap = () => {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     const { latitude, longitude } = position.coords;
-                    const { Map } = google.maps;
+                    const { Map, Marker } = window.google.maps;
 
                     const map = new Map(document.getElementById('map'), {
                         center: { lat: latitude, lng: longitude },
                         zoom: 14,
                     });
 
-                    new google.maps.Marker({
+                    new Marker({
                         position: { lat: latitude, lng: longitude },
                         map: map,
                         title: 'Your Location',
