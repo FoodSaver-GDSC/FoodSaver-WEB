@@ -1,13 +1,11 @@
 "use client"
 
+import { cls } from '@/components/\butils/utils';
 import GoogleMap from '@/components/GoogleMap';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { SubmitHandler, FieldValues, useForm } from 'react-hook-form';
 
-export function cls(...classnames: any[]) {
-    return classnames.join(" ");
-}
 
 interface FormData extends FieldValues {
     search: string;
@@ -39,11 +37,22 @@ const Page = () => {
 
     const onValid: SubmitHandler<FormData> = ({ search }) => {
         console.log(search)
+        if (search) {
+            axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/foodbanks/search?keyword=${search}`,
+            ).then(res => {
+                console.log(res)
+                const resContent = res.data.content
+                if (resContent.length === 0) {
+                    alert("검색 결과가 없습니다!")
+                } else {
+                    setAddress(res.data.content)
+                    setPages(Number(res.data.totalPages))
+                }
+            }).catch(err => console.log(err))
+        }
         reset()
     }
-    const onClickPage = (index: number) => {
-        setPage(index)
-    }
+
     useEffect(() => {
         axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/foodbanks?page=${page + 1}`)
             .then(res => {
