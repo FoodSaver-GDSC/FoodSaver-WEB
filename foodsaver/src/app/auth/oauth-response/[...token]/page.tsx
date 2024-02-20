@@ -9,21 +9,18 @@ import { useParams, useRouter } from 'next/navigation';
 const Redirect = () => {
     const router = useRouter();
     const param = useParams()
-    const token = param?.token?.[0]?.substring(7);
+    const token = param?.token?.[0];
     // const cookieStore = cookies();
 
-    console.log(param?.token[0].substring(7))
+    console.log(param?.token[0])
     localStorage.setItem("token", token)
-    // useEffect(() => {
-    //     const token = param?.token[0].substring(7);
-    //     if (token) {
+    if (localStorage.getItem("token") !== undefined || localStorage.getItem("token") !== null) {
+        router.push("/")
+    }
 
-
-    //     }
-    // }, []);
     return (
         <div>
-            dfsf
+            로그인중,,,
         </div>
     );
 };
