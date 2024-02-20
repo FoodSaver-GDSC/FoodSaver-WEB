@@ -36,7 +36,12 @@ const Header = () => {
                     </div>
                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[10000] p-2 shadow bg-base-100 rounded-box w-52">
                         <li><Link href={"/"}>레시피 생성하기</Link></li>
-                        <li><a onClick={() => document.getElementById('my_modal_1').showModal()}>커뮤니티</a></li>
+                        <li><a onClick={() => {
+                            const modal = document.getElementById('my_modal_1');
+                            if (modal) {
+                                modal.showModal();
+                            }
+                        }}>커뮤니티</a></li>
                         <li><Link href="/foodbank">내 근처 푸드뱅크</Link></li>
                     </ul>
 
