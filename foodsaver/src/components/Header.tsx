@@ -57,10 +57,10 @@ const Header = () => {
                 </div>}
 
 
-            <div className="font-bold text-2xl">
+            <Link href="/" className="font-bold text-2xl">
                 <span className="text-mainColor">Food</span>
                 <span className="text-textColor">Saver</span>
-            </div>
+            </Link>
             <div>
                 {
                     clickBookmark ?

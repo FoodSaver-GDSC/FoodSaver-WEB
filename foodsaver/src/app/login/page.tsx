@@ -1,12 +1,15 @@
+"use client"
+
 import Image from 'next/image';
 import React from 'react';
 import googlePng from "../../../public/Google.png"
+import { signIn } from 'next-auth/react';
 
 const Page = () => {
     return (
         <div className='mt-20 flex flex-col items-center justify-center space-y-2'>
             <div className='flex'>
-                <div className='btn flex items-center border bg-white font-medium border-borderColor rounded-full px-8 py-2'>
+                <div onClick={() => signIn('google', { callbackUrl: "/" })} className='btn flex items-center border bg-white font-medium border-borderColor rounded-full px-8 py-2'>
                     <Image src={googlePng} alt="google" className='h-8 w-8' />
                     구글 계정으로 계속하기
                 </div>

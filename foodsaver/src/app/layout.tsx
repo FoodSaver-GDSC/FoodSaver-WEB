@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Header from "../components/Header";
+import Provider from "@/components/Provider";
 
 const MyLocalFont = localFont({
   src: [
@@ -35,13 +36,16 @@ export default function Layout({
   return (
     <html className="flex justify-center bg-white">
       <body className="w-full sm:w-[640px] bg-white">
-        <div className=" fixed top-0 w-full sm:w-[640px] z-0">
-          <Header />
-        </div>
-        <div className="mt-28 px-5 sm:px-20">
-          {children}
-        </div>
+        <Provider>
+          <div className=" fixed top-0 w-full sm:w-[640px] z-0">
+            <Header />
+          </div>
+          <div className="mt-28 px-5 sm:px-20">
+            {children}
+          </div>
 
+
+        </Provider>
 
 
       </body>

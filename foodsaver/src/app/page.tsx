@@ -39,8 +39,12 @@ export default function Home() {
   }
 
   const onClickMakeRecipe = () => {
+    if (ingredients.length !== 0) {
+      router.push(`/recipes/${"0123"}`)
+    } else {
+      alert("재료를 입력해주세요!")
+    }
 
-    router.push(`/recipes/${"0123"}`)
   }
 
 
@@ -75,8 +79,8 @@ export default function Home() {
 
       </form>
 
-      <div onClick={onClickMakeRecipe} className="flex justify-center">
-        <button className=" btn bg-white border rounded-full px-6 border-mainColor text-mainColor hover:bg-mainColor hover:text-white hover:border-mainColor">레시피 생성하기</button>
+      <div className="flex justify-center">
+        <button onClick={onClickMakeRecipe} className=" btn bg-white border rounded-full px-6 border-mainColor text-mainColor hover:bg-mainColor hover:text-white hover:border-mainColor">레시피 생성하기</button>
       </div>
     </div>
   );
