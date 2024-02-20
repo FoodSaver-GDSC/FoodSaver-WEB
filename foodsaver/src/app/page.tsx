@@ -1,12 +1,12 @@
 'use client'
 import Image from "next/image";
 import Layout from "./layout";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation'
 
-type FormValues = {
-  ingred: string
+interface FormValues extends FieldValues {
+  ingred: string;
 }
 
 type ingredient = {
