@@ -10,7 +10,7 @@ const GoogleMap = () => {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     const { latitude, longitude } = position.coords;
-                    const { Map, Marker } = (window.google && window.google.maps) || {};
+                    const { Map, Marker } = (window as any).google.maps;
 
                     const map = new Map(document.getElementById('map'), {
                         center: { lat: latitude, lng: longitude },
@@ -33,12 +33,8 @@ const GoogleMap = () => {
     }
 
     useEffect(() => {
-        // Ensure 'initMap' does not already exist on window
-        if (!('initMap' in window)) {
-            window.initMap = initMap;
-        }
-
-        initMap();
+        window.initMap = initMap as () => void;
+        initMap()
     }, []);
 
     return (
