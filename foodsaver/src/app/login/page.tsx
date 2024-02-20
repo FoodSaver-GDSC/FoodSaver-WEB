@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React from 'react';
 import googlePng from "../../../public/Google.png"
 
-const page = () => {
+const Page = () => {
     return (
         <div className='mt-20 flex flex-col items-center justify-center space-y-2'>
             <div className='flex'>
@@ -18,4 +18,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;
