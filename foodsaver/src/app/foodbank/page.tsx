@@ -2,10 +2,10 @@
 
 import KakaoMap from '@/components/KaKaoMap';
 import React from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, FieldValues, useForm } from 'react-hook-form';
 
 
-interface FormData {
+interface FormData extends FieldValues {
     search: string;
 }
 const address = [
@@ -19,7 +19,7 @@ const address = [
 const Page = () => {
     const { register, handleSubmit, reset } = useForm()
 
-    const onValid: SubmitHandler<FormData> = (data: FormData) => {
+    const onValid: SubmitHandler<FormData> = (data) => {
         console.log(data.search)
         reset()
     }
