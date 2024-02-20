@@ -33,7 +33,6 @@ const GoogleMap = () => {
     }
 
     useEffect(() => {
-        window.initMap = initMap as () => void;
         initMap()
     }, []);
 
