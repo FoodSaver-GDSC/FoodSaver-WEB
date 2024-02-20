@@ -9,8 +9,6 @@ const Header = () => {
     const pathname = usePathname()
 
 
-
-
     const onClickBookmark = (bool: boolean) => {
         alert("로그인이 필요합니다!")
         setClickBookmark(bool)
@@ -37,7 +35,7 @@ const Header = () => {
                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[10000] p-2 shadow bg-base-100 rounded-box w-52">
                         <li><Link href={"/"}>레시피 생성하기</Link></li>
                         <li><a onClick={() => {
-                            const modal = document.getElementById('my_modal_1');
+                            const modal = document.getElementById('my_modal_1') as HTMLDialogElement | null;
                             if (modal) {
                                 modal.showModal();
                             }
