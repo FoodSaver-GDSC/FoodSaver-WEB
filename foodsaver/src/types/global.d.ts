@@ -1,3 +1,3 @@
 interface Window {
-    kakao?: any;
+    google?: any;
 }

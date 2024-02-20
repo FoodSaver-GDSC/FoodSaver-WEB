@@ -1,6 +1,6 @@
 "use client"
 
-import KakaoMap from '@/components/KaKaoMap';
+import GoogleMap from '@/components/GoogleMap';
 import React from 'react';
 import { SubmitHandler, FieldValues, useForm } from 'react-hook-form';
 
@@ -32,7 +32,7 @@ const Page = () => {
                 <span className='text-3xl'>푸드뱅크 지도</span>
             </div>
             <div className=''>
-                <KakaoMap />
+                <GoogleMap />
                 <div className='py-8 space-y-4'>
                     <form onSubmit={handleSubmit(onValid)} className='relative'>
                         <input {...register("search")} className='input input-bordered w-full' />
