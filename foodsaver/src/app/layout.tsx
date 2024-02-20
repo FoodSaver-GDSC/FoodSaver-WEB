@@ -37,8 +37,9 @@ export default function Layout({
   return (
     <html className="flex justify-center bg-white">
       <script
-        src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_KEY}&callback=initMap`}
         async
+        defer
+        src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_KEY}&callback=initMap`}
       />
       <body className="w-full sm:w-[640px] bg-white">
         <Provider>
