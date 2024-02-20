@@ -1,9 +1,13 @@
 "use client"
 
 import GoogleMap from '@/components/GoogleMap';
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { SubmitHandler, FieldValues, useForm } from 'react-hook-form';
 
+export function cls(...classnames: any[]) {
+    return classnames.join(" ");
+}
 
 interface FormData extends FieldValues {
     search: string;
@@ -16,13 +20,40 @@ const address = [
     { center: "전국푸드뱅크", area: "중앙", detail: "서울특별시 마포구 만리재로 14 한국사회복지회관 1201호", phone: "02-2077-3985" },
 
 ]
+interface AddressValue {
+    name: string,
+    id: number,
+    location: string,
+    address: string,
+    phoneNumber: string
+}
+
+
 const Page = () => {
     const { register, handleSubmit, reset } = useForm<FormData>()
+    const [address, setAddress] = useState<AddressValue[]>([])
+    const [loading, setLoading] = useState<boolean>(false)
+    const [pages, setPages] = useState<number | undefined>()
+    const [page, setPage] = useState<number>(0)
+    const [nowPageDivide, setNowPageDivide] = useState<number | undefined>()
 
     const onValid: SubmitHandler<FormData> = ({ search }) => {
         console.log(search)
         reset()
     }
+    const onClickPage = (index: number) => {
+        setPage(index)
+    }
+    useEffect(() => {
+        axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/foodbanks?page=${page + 1}`)
+            .then(res => {
+                console.log(res)
+                setAddress(res.data.content)
+                setPages(Number(res.data.totalPages))
+                setLoading(true)
+
+            }).catch(err => console.log(err))
+    }, [])
     return (
         <div>
             <div className='bg-textColor text-white p-2 rounded-xl text-xs'>
@@ -43,7 +74,7 @@ const Page = () => {
                         </button>
                     </form>
                     <div className="overflow-x-scroll text-nowrap">
-                        <table className="table w-full">
+                        {loading ? <table className="table w-full">
                             {/* head */}
                             <thead className=''>
                                 <tr>
@@ -58,20 +89,28 @@ const Page = () => {
                                 {address?.map((a, i) =>
                                     <tr key={i} className=''>
                                         <th>{i + 1}</th>
-                                        <td>{a.center}</td>
-                                        <td>{a.area}</td>
-                                        <td>{a.detail}</td>
-                                        <td>{a.phone}</td>
+                                        <td>{a.name}</td>
+                                        <td>{a.location}</td>
+                                        <td>{a.address}</td>
+                                        <td>{a.phoneNumber}</td>
                                     </tr>
                                 )}
                             </tbody>
-                        </table>
+                        </table> :
+                            <div className='flex items-center justify-center h-64'>
+                                <div className='loading' />
+                            </div>
+                        }
+
                     </div>
                     <div className="join flex justify-center">
-                        <button className="join-item btn btn-active">1</button>
-                        <button className="join-item btn ">2</button>
-                        <button className="join-item btn">3</button>
-                        <button className="join-item btn">4</button>
+                        {loading ?
+                            Array(pages).fill(0).map((item, key) =>
+                                <button onClick={() => setPage(key)} className={cls("join-item btn ", page == key + 1 ? "btn-active" : null)}>{key + 1}</button>
+                            )
+                            :
+                            null
+                        }
                     </div>
                 </div>
             </div>
