@@ -10,7 +10,7 @@ const GoogleMap = () => {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     const { latitude, longitude } = position.coords;
-                    const { Map, Marker } = window.google.maps;
+                    const { Map, Marker } = (window.google && window.google.maps) || {};
 
                     const map = new Map(document.getElementById('map'), {
                         center: { lat: latitude, lng: longitude },
