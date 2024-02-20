@@ -10,7 +10,7 @@ const howToMake = [
     "설탕, 시나몬 가루를 섞고, 재방 같은 그릇에 담아줍니다.",
     "쟁반에 가루를 담아 튀긴 가래떡에 가루를 골구르 묻혀주면 완성!"
 ]
-const page = () => {
+const Page = () => {
     const [bookmark, setClickBookmark] = useState<boolean>(false)
 
     const onClickBookmark = () => {
@@ -55,4 +55,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;

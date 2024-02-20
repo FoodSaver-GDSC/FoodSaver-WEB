@@ -59,8 +59,8 @@ export default function Home() {
             <hr className=" border-borderColor" />
           </div>
           <div className="mt-1">
-            {ingredients?.map(ingre =>
-              <div className="px-10 text-xl border-b border-borderColor py-2 flex justify-between">
+            {ingredients?.map((ingre, i) =>
+              <div key={i} className="px-10 text-xl border-b border-borderColor py-2 flex justify-between">
                 <div>
                   {ingre.name}
                 </div>
