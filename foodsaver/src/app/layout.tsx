@@ -42,6 +42,7 @@ export default function Layout({
         src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_KEY}&callback=initMap`}
       />
       <body className="w-full sm:w-[640px] bg-white">
+
         <Provider>
           <div className=" fixed top-0 w-full sm:w-[640px] z-0">
             <Header />

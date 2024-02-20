@@ -4,12 +4,17 @@ import Image from 'next/image';
 import React from 'react';
 import googlePng from "../../../public/Google.png"
 import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation'
 
 const Page = () => {
+    const router = useRouter()
+    const onClick = () => {
+        router.push("http://foodsaver.duckdns.org:8080/api/v1/auth/oauth2/google")
+    }
     return (
         <div className='mt-20 flex flex-col items-center justify-center space-y-2'>
             <div className='flex'>
-                <div onClick={() => signIn('google', { callbackUrl: "/" })} className='btn flex items-center border bg-white font-medium border-borderColor rounded-full px-8 py-2'>
+                <div onClick={onClick} className='btn flex items-center border bg-white font-medium border-borderColor rounded-full px-8 py-2'>
                     <Image src={googlePng} alt="google" className='h-8 w-8' />
                     구글 계정으로 계속하기
                 </div>
