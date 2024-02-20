@@ -106,7 +106,7 @@ const Page = () => {
                     <div className="join flex justify-center">
                         {loading ?
                             Array(pages).fill(0).map((item, key) =>
-                                <button onClick={() => setPage(key)} className={cls("join-item btn ", page == key + 1 ? "btn-active" : null)}>{key + 1}</button>
+                                <button key={key + 1} onClick={() => setPage(key)} className={cls("join-item btn ", page == key + 1 ? "btn-active" : null)}>{key + 1}</button>
                             )
                             :
                             null
