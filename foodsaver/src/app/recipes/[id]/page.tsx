@@ -7,7 +7,7 @@ const recipes = [
     { id: 2, name: "가래떡 어쩌구" },
     { id: 3, name: "가래떡 저쩌구" },
 ]
-const page = () => {
+const Page = () => {
     const [loading, setLoading] = useState<boolean>(true)
     // const [recipes]
 
@@ -39,4 +39,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;

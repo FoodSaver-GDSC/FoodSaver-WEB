@@ -16,7 +16,7 @@ const address = [
     { center: "전국푸드뱅크", area: "중앙", detail: "서울특별시 마포구 만리재로 14 한국사회복지회관 1201호", phone: "02-2077-3985" },
 
 ]
-const page = () => {
+const Page = () => {
     const { register, handleSubmit, reset } = useForm()
 
     const onValid = (data: FormData) => {
@@ -79,4 +79,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;

@@ -16,7 +16,7 @@ const boormarks = [
 
 ]
 
-const page = () => {
+const Page = () => {
     return (
         <div>
             <div>
@@ -28,8 +28,8 @@ const page = () => {
                 </div>
             </div>
             <div className='py-2 space-y-5'>
-                {boormarks?.map(b =>
-                    <div className='grid grid-cols-[1fr,4fr] space-x-2 '>
+                {boormarks?.map((b, i) =>
+                    <div key={i} className='grid grid-cols-[1fr,4fr] space-x-2 '>
                         <div className='h-20 w-20 bg-gray-100' />
                         <div className='space-y-2'>
                             <div className='flex justify-between '>
@@ -54,4 +54,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;
