@@ -1,5 +1,6 @@
 declare global {
     interface Window {
+        initMap?: () => void;
         google: {
             maps: {
                 Map: any;
