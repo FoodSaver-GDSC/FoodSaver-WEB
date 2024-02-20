@@ -33,8 +33,12 @@ const GoogleMap = () => {
     }
 
     useEffect(() => {
-        window.initMap = initMap as () => void;
-        initMap()
+        // Ensure 'initMap' does not already exist on window
+        if (!('initMap' in window)) {
+            window.initMap = initMap;
+        }
+
+        initMap();
     }, []);
 
     return (
