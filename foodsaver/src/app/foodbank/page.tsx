@@ -17,10 +17,10 @@ const address = [
 
 ]
 const Page = () => {
-    const { register, handleSubmit, reset } = useForm()
+    const { register, handleSubmit, reset } = useForm<FormData>()
 
-    const onValid: SubmitHandler<FormData> = (data) => {
-        console.log(data.search)
+    const onValid: SubmitHandler<FormData> = ({ search }) => {
+        console.log(search)
         reset()
     }
     return (
