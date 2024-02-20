@@ -31,9 +31,10 @@ const Page = () => {
     const { register, handleSubmit, reset } = useForm<FormData>()
     const [address, setAddress] = useState<AddressValue[]>([])
     const [loading, setLoading] = useState<boolean>(false)
-    const [pages, setPages] = useState<number | undefined>()
+    const [totalPages, setTotalPages] = useState<number>()
     const [page, setPage] = useState<number>(0)
     const [nowPageDivide, setNowPageDivide] = useState<number | undefined>()
+    const [pageIndex, setPageIndex] = useState<number>(1)
 
     const onValid: SubmitHandler<FormData> = ({ search }) => {
         console.log(search)
@@ -46,7 +47,7 @@ const Page = () => {
                     alert("검색 결과가 없습니다!")
                 } else {
                     setAddress(res.data.content)
-                    setPages(Number(res.data.totalPages))
+                    setTotalPages(Number(res.data.totalPages))
                 }
             }).catch(err => console.log(err))
         }
@@ -54,15 +55,14 @@ const Page = () => {
     }
 
     useEffect(() => {
-        axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/foodbanks?page=${page + 1}`)
+        axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/foodbanks?page=${page}`)
             .then(res => {
                 console.log(res)
                 setAddress(res.data.content)
-                setPages(Number(res.data.totalPages))
+                setTotalPages(Number(res.data.totalPages))
                 setLoading(true)
-
             }).catch(err => console.log(err))
-    }, [])
+    }, [page])
     return (
         <div>
             <div className='bg-textColor text-white p-2 rounded-xl text-xs'>
@@ -97,7 +97,7 @@ const Page = () => {
                             <tbody>
                                 {address?.map((a, i) =>
                                     <tr key={i} className=''>
-                                        <th>{i + 1}</th>
+                                        <th>{a.id}</th>
                                         <td>{a.name}</td>
                                         <td>{a.location}</td>
                                         <td>{a.address}</td>
@@ -113,13 +113,24 @@ const Page = () => {
 
                     </div>
                     <div className="join flex justify-center">
+                        <button onClick={() => {
+                            const newPage = pageIndex === 1 ? pageIndex : pageIndex - 1
+
+                            setPageIndex(newPage)
+                            console.log(pageIndex)
+                        }} className="join-item btn">«</button>
                         {loading ?
-                            Array(pages).fill(0).map((item, key) =>
-                                <button key={key + 1} onClick={() => setPage(key)} className={cls("join-item btn ", page == key + 1 ? "btn-active" : null)}>{key + 1}</button>
+                            Array.from({ length: totalPages + 1 }, (_, index) => index).slice(pageIndex * 5 - 4, pageIndex * 5 + 1).map((item, key) =>
+                                <button key={key} onClick={() => setPage(item - 1)} className={cls("join-item btn ", page == item - 1 ? "btn-active" : null)}>{item}</button>
                             )
                             :
                             null
                         }
+                        <button onClick={() => {
+                            const newPage = pageIndex === ~~(totalPages / 5) + 1 ? pageIndex : pageIndex + 1
+                            setPageIndex(newPage)
+                            console.log(pageIndex)
+                        }} className="join-item btn">»</button>
                     </div>
                 </div>
             </div>

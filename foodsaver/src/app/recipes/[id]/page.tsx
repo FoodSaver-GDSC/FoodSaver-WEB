@@ -16,7 +16,7 @@ const Page = () => {
             {loading ?
                 <div className='p-4'>
                     <div className='text-xl'>
-                        <span className='text-mainColor'>레시피</span>가 생성되었어요!
+                        <span className='text-mainColor font-bold'>레시피</span>가 생성되었어요!
                     </div>
                     <ul className='menu rounded-box menu-lg '>
                         {recipes?.map((recipe, id) =>
