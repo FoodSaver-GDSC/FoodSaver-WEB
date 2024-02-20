@@ -19,8 +19,8 @@ const Page = () => {
                         <span className='text-mainColor'>레시피</span>가 생성되었어요!
                     </div>
                     <ul className='menu rounded-box menu-lg '>
-                        {recipes?.map(recipe =>
-                            <li>
+                        {recipes?.map((recipe, id) =>
+                            <li key={id}>
                                 <Link href={`/recipe/${recipe.id}`}>{recipe.name}</Link>
                             </li>
                         )}
