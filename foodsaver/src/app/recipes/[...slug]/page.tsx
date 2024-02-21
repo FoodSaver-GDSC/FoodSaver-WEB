@@ -14,13 +14,18 @@ const Page = () => {
     const [loading, setLoading] = useState<boolean>(false)
     const { slug } = useParams() as { slug: string[] }
     const [recipes, setRecipes] = useState<RecipesValues[] | null>()
+    const router = useRouter()
 
     useEffect(() => {
         axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/recipes/filter?ingredientNames=${slug}`).then(res => {
             console.log(res)
             setRecipes(res.data)
             setLoading(true)
-        }).catch(err => console.log(err))
+        }).catch(err => {
+            console.log(err)
+            alert("레시피를 생성하지 못 했습니다. 이전페이지로 돌아갑니다")
+            router.back()
+        })
     }, [])
 
 

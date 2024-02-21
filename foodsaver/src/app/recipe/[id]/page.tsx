@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import axios from 'axios';
 import { getItemFromLocalStorage } from '@/components/utils/locaStroage';
 
@@ -15,6 +15,7 @@ const Page = () => {
     const [ingredients, setIngredients] = useState<string | null>()
     const [howToMake, setHowToMake] = useState<string[] | null>()
     const token = getItemFromLocalStorage("token")
+    const router = useRouter()
 
     useEffect(() => {
         axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/recipes/${id}`).then(res => {
@@ -36,7 +37,11 @@ const Page = () => {
                 Authorization: `Bearer ${token}`,
             },
         }).then(res => console.log(res))
-            .catch(res => console.log(res))
+            .catch(res => {
+                console.log(res)
+                alert("로그인이 필요한 기능입니다!")
+                router.push("/login")
+            })
         setClickBookmark(prev => !prev)
     }
     return (
