@@ -1,6 +1,6 @@
 "use client"
 
-import { getItemFromLocalStorage } from '@/components/utils/locaStroage';
+import { getItemFromLocalStorage, removeItemFromLocalStorage } from '@/components/utils/locaStroage';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
@@ -25,7 +25,12 @@ const Page = () => {
         }).then(res => {
             console.log(res)
             setRecipes(res.data)
-        }).catch(err => console.log(err))
+        }).catch(err => {
+            console.log(err)
+            alert("다시 로그인해주세요!")
+            removeItemFromLocalStorage("token")
+            router.back("/")
+        })
     }, [])
 
     const onClickRecipe = (id: number) => {
