@@ -1,22 +1,35 @@
-import React from 'react';
+"use client"
 
-const boormarks = [
-    {
-        name: "가래떡 츄러스",
-        ingredients: "가래떡, 설탕(6T), 시나몬 가루(2T)"
-    },
-    {
-        name: "순두부 열라면",
-        ingredients: "열라면 반 개, 물 350ml, 순두부 반모, 대파, 고춧가루, 후추"
-    },
-    {
-        name: "가래떡 츄러스",
-        ingredients: "베이컨, 슬라이스 치즈, 밥, 후레이크"
-    },
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 
-]
 
+interface RecipeValues {
+    name: string,
+    ingredients: string
+    imageUrlBig: string,
+    id: number
+}
 const Page = () => {
+    const [recipes, setRecipes] = useState<RecipeValues[] | null>()
+    const token = localStorage.getItem("token")
+    const router = useRouter()
+
+    useEffect(() => {
+        axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/members/my-recipe`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }).then(res => {
+            console.log(res)
+            setRecipes(res.data)
+        }).catch(err => console.log(err))
+    }, [])
+
+    const onClickRecipe = (id: number) => {
+        router.push(`/recipe/${id}`)
+    }
     return (
         <div>
             <div>
@@ -24,17 +37,17 @@ const Page = () => {
                     저장한 레시피
                 </div>
                 <div>
-                    전체 <span className='font-bold'>{boormarks.length}</span>개
+                    전체 <span className='font-bold'>{recipes?.length}</span>개
                 </div>
             </div>
             <div className='py-2 space-y-5'>
-                {boormarks?.map((b, i) =>
-                    <div key={i} className='grid grid-cols-[1fr,4fr] space-x-2 '>
-                        <div className='h-20 w-20 bg-gray-100' />
+                {recipes?.map((r, i) =>
+                    <div onClick={() => onClickRecipe(r.id)} key={i} className='grid grid-cols-[1fr,4fr] space-x-2  cursor-pointer'>
+                        <img src={r.imageUrlBig} className='h-20 w-20 bg-gray-100' />
                         <div className='space-y-2'>
                             <div className='flex justify-between '>
-                                <div>
-                                    {b.name}
+                                <div className='font-bold'>
+                                    {r.name}
                                 </div>
                                 <div>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-mainColor">
@@ -43,8 +56,8 @@ const Page = () => {
 
                                 </div>
                             </div>
-                            <div>
-                                {b.ingredients}
+                            <div className='text-xs'>
+                                {r.ingredients}
                             </div>
                         </div>
                     </div>

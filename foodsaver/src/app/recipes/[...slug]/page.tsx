@@ -11,6 +11,7 @@ const recipes = [
 const Page = () => {
     const [loading, setLoading] = useState<boolean>(true)
     const { slug } = useParams() as { slug: string[] }
+
     console.log(slug)
 
     return (
