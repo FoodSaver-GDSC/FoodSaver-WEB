@@ -39,7 +39,7 @@ export default function Home() {
   }
 
   const onClickMakeRecipe = () => {
-    const queryParams = ingredients.map((item, index) => `${item.name}`).join('/');
+    const queryParams = ingredients.map((item, index) => `${item.name}`).join(',');
     console.log(queryParams)
     if (ingredients.length !== 0) {
       router.push(`/recipes/${queryParams}`)

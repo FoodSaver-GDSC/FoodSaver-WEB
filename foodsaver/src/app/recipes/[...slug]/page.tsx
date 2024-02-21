@@ -1,18 +1,27 @@
 "use client"
+import axios from 'axios';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const recipes = [
-    { id: 1, name: "가래떡 구이" },
-    { id: 2, name: "가래떡 어쩌구" },
-    { id: 3, name: "가래떡 저쩌구" },
-]
+
+interface RecipesValues {
+    id: number,
+    name: string
+}
+
 const Page = () => {
     const [loading, setLoading] = useState<boolean>(true)
     const { slug } = useParams() as { slug: string[] }
+    const [recipes, setRecipes] = useState<RecipesValues[] | null>()
 
-    console.log(slug)
+    useEffect(() => {
+        axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/recipes/filter?ingredientNames=${slug}`).then(res => {
+            console.log(res)
+            setRecipes(res.data)
+        }).catch(err => console.log(err))
+    }, [])
+
 
     return (
         <div className=''>
@@ -22,9 +31,9 @@ const Page = () => {
                         <span className='text-mainColor font-bold'>레시피</span>가 생성되었어요!
                     </div>
                     <ul className='menu rounded-box menu-lg '>
-                        {recipes?.map((recipe, id) =>
-                            <li key={id}>
-                                <Link href={`/recipe/${recipe.id}`}>{recipe.name}</Link>
+                        {recipes?.map((recipe, key) =>
+                            <li key={key}>
+                                <Link href={`/recipe/${recipe.id}`}>{key + 1}. {recipe.name}</Link>
                             </li>
                         )}
                     </ul>
