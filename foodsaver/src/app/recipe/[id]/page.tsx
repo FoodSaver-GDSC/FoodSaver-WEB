@@ -1,19 +1,41 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { useParams } from 'next/navigation';
+import axios from 'axios';
 
-const howToMake = [
-    "가래떡을 윗부분만 조금 남기고 반으로 잘라줍니다.",
-    "꽈배기 모양처럼 떡을 꼬아줍니다.",
-    "팬에 기름을 두르고 바삭하게 튀겨줍니다.",
-    "설탕, 시나몬 가루를 섞고, 재방 같은 그릇에 담아줍니다.",
-    "쟁반에 가루를 담아 튀긴 가래떡에 가루를 골구르 묻혀주면 완성!"
-]
+
 const Page = () => {
     const [bookmark, setClickBookmark] = useState<boolean>(false)
+    const { id } = useParams() as { id: string }
+    const [name, setName] = useState<string | null>()
+    const [imageUrlBig, setImgUrlBig] = useState<string | null>()
+    const [ingredients, setIngredients] = useState<string | null>()
+    const [howToMake, setHowToMake] = useState<string[] | null>()
+    const token = localStorage.getItem("token")
+
+    useEffect(() => {
+        axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/recipes/${id}`).then(res => {
+            console.log(res)
+            setName(res.data.name)
+            setImgUrlBig(res.data.imageUrlBig)
+            setIngredients(res.data.ingredients)
+
+            const temp = res.data.recipe
+            const templist = temp.split("\n")
+            setHowToMake(templist)
+        }).catch(err => console.log(err))
+    }, [])
+
 
     const onClickBookmark = () => {
+        axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/members/toogle-recipe?recipeId=${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }).then(res => console.log(res))
+            .catch(res => console.log(res))
         setClickBookmark(prev => !prev)
     }
     return (
@@ -21,7 +43,7 @@ const Page = () => {
             <div>
                 <div className='flex justify-between items-center'>
                     <div className='font-extrabold text-2xl text-textColor'>
-                        가래떡 츄러스
+                        {name}
                     </div>
                     <div onClick={onClickBookmark}>
                         {bookmark ?
@@ -38,14 +60,17 @@ const Page = () => {
                 </div>
             </div>
             <div className='space-y-2'>
-                <div className='text-sm'>
-                    준비재료 : 가래떡, 설탕(6T), 시나몬 가루(2T)
+                <div className='text-sm whitespace-pre-wrap'>
+                    {ingredients}
                 </div>
-                <div className='h-40 bg-gray-300' />
+                <div className='flex justify-center'>
+                    <img src={imageUrlBig ? imageUrlBig : undefined} className='h-40 w-full object-contain bg-gray-100' />
+                </div>
+
                 <div className='space-y-2'>
-                    {howToMake.map((h, id) =>
+                    {howToMake?.map((h, id) =>
                         <div key={id} className='space-x-2'>
-                            <span>{id + 1}.</span><span>{h}</span>
+                            <span>{h}</span>
                         </div>
 
                     )}

@@ -1,5 +1,6 @@
 "use client"
 import Link from 'next/link';
+import { useParams, useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 const recipes = [
@@ -9,7 +10,8 @@ const recipes = [
 ]
 const Page = () => {
     const [loading, setLoading] = useState<boolean>(true)
-    // const [recipes]
+    const { slug } = useParams() as { slug: string[] }
+    console.log(slug)
 
     return (
         <div className=''>

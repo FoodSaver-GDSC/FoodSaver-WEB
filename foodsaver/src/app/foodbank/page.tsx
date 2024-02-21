@@ -33,7 +33,6 @@ const Page = () => {
     const [loading, setLoading] = useState<boolean>(false)
     const [totalPages, setTotalPages] = useState<number>(0)
     const [page, setPage] = useState<number>(0)
-    const [nowPageDivide, setNowPageDivide] = useState<number | undefined>()
     const [pageIndex, setPageIndex] = useState<number>(1)
 
     const onValid: SubmitHandler<FormData> = ({ search }) => {

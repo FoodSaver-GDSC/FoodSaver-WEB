@@ -7,10 +7,17 @@ const Header = () => {
     const [clickBookmark, setClickBookmark] = useState<boolean>(false)
     const router = useRouter()
     const pathname = usePathname()
+    const token = localStorage.getItem("token")
 
 
     const onClickBookmark = (bool: boolean) => {
-        alert("로그인이 필요합니다!")
+        if (token) {
+            router.push("/bookmark")
+        } else {
+            alert("로그인이 필요합니다!")
+            router.push("/login")
+        }
+
         setClickBookmark(bool)
         console.log(bool)
     }

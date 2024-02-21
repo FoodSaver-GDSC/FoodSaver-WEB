@@ -39,8 +39,10 @@ export default function Home() {
   }
 
   const onClickMakeRecipe = () => {
+    const queryParams = ingredients.map((item, index) => `${item.name}`).join('/');
+    console.log(queryParams)
     if (ingredients.length !== 0) {
-      router.push(`/recipes/${"0123"}`)
+      router.push(`/recipes/${queryParams}`)
     } else {
       alert("재료를 입력해주세요!")
     }
