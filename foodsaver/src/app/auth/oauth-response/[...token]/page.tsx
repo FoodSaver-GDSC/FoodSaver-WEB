@@ -2,9 +2,9 @@
 
 import { GetServerSideProps } from 'next';
 import { parse } from 'cookie';
-import { setTokenCookie } from '@/components/\butils/auth';
+import { setTokenCookie } from '@/components/utils/auth';
 import { useParams, useRouter } from 'next/navigation';
-import { getItemFromLocalStorage, setItemToLocalStorage } from '@/components/\butils/locaStroage';
+import { getItemFromLocalStorage, setItemToLocalStorage } from '@/components/utils/locaStroage';
 
 
 const Redirect = () => {

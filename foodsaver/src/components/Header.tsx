@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import { getItemFromLocalStorage } from './\butils/locaStroage';
+import { getItemFromLocalStorage } from './utils/locaStroage';
 
 const Header = () => {
     const [clickBookmark, setClickBookmark] = useState<boolean>(false)

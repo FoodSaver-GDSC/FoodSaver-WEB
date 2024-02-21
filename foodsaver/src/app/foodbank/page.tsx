@@ -1,6 +1,6 @@
 "use client"
 
-import { cls } from '@/components/\butils/utils';
+import { cls } from '@/components/utils/utils';
 import GoogleMap from '@/components/GoogleMap';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';

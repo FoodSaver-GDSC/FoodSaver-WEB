@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import axios from 'axios';
-import { getItemFromLocalStorage } from '@/components/\butils/locaStroage';
+import { getItemFromLocalStorage } from '@/components/utils/locaStroage';
 
 
 const Page = () => {
