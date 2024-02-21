@@ -29,7 +29,7 @@ const Page = () => {
             console.log(err)
             alert("다시 로그인해주세요!")
             removeItemFromLocalStorage("token")
-            router.back("/")
+            router.push("/")
         })
     }, [])
 
