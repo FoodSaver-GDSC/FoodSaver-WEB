@@ -11,7 +11,7 @@ interface RecipesValues {
 }
 
 const Page = () => {
-    const [loading, setLoading] = useState<boolean>(true)
+    const [loading, setLoading] = useState<boolean>(false)
     const { slug } = useParams() as { slug: string[] }
     const [recipes, setRecipes] = useState<RecipesValues[] | null>()
 
@@ -19,6 +19,7 @@ const Page = () => {
         axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/recipes/filter?ingredientNames=${slug}`).then(res => {
             console.log(res)
             setRecipes(res.data)
+            setLoading(true)
         }).catch(err => console.log(err))
     }, [])
 
