@@ -13,7 +13,7 @@ interface RecipeValues {
 }
 const Page = () => {
     const [recipes, setRecipes] = useState<RecipeValues[] | null>()
-    const token = localStorage.getItem("token")
+    const token = getItemFromLocalStorage("token")
     const router = useRouter()
 
     useEffect(() => {

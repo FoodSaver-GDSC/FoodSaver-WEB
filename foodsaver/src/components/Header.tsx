@@ -2,12 +2,13 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
+import { getItemFromLocalStorage } from './\butils/locaStroage';
 
 const Header = () => {
     const [clickBookmark, setClickBookmark] = useState<boolean>(false)
     const router = useRouter()
     const pathname = usePathname()
-    const token = localStorage.getItem("token")
+    const token = getItemFromLocalStorage("token")
 
 
     const onClickBookmark = (bool: boolean) => {

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import axios from 'axios';
+import { getItemFromLocalStorage } from '@/components/\butils/locaStroage';
 
 
 const Page = () => {
@@ -13,7 +14,7 @@ const Page = () => {
     const [imageUrlBig, setImgUrlBig] = useState<string | null>()
     const [ingredients, setIngredients] = useState<string | null>()
     const [howToMake, setHowToMake] = useState<string[] | null>()
-    const token = localStorage.getItem("token")
+    const token = getItemFromLocalStorage("token")
 
     useEffect(() => {
         axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/recipes/${id}`).then(res => {
