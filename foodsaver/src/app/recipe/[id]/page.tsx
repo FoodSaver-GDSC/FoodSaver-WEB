@@ -52,7 +52,7 @@ const Page = () => {
                 bookmarksNames += "," + id
                 console.log(bookmarksNames)
                 setClickBookmark(true)
-                setItemToLocalStorage("bookmarks", bookmarksNames)
+                setItemToLocalStorage("bookmarks", bookmarksNames as string)
             } else {
                 var arr = bookmarksNames?.split(",")
 
@@ -62,7 +62,7 @@ const Page = () => {
                 console.log(arr)
                 bookmarksNames = arr?.join(",")
                 setClickBookmark(false)
-                setItemToLocalStorage("bookmarks", bookmarksNames)
+                setItemToLocalStorage("bookmarks", bookmarksNames as string)
 
             }
         })
