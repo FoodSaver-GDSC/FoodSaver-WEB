@@ -60,7 +60,7 @@ const Page = () => {
                     return item !== id
                 })
                 console.log(arr)
-                bookmarksNames = arr?.join(",")
+                bookmarksNames = arr?.join(",") || "";
                 setClickBookmark(false)
                 setItemToLocalStorage("bookmarks", bookmarksNames as string)
 
@@ -71,7 +71,6 @@ const Page = () => {
                 alert("로그인이 필요한 기능입니다!")
                 router.push("/login")
             })
-        setClickBookmark(prev => !prev)
     }
 
     return (
