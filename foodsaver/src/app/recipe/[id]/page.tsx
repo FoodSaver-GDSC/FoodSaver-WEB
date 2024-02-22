@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import axios from 'axios';
-import { getItemFromLocalStorage } from '@/components/utils/locaStroage';
+import { getItemFromLocalStorage, setItemToLocalStorage } from '@/components/utils/locaStroage';
 
 
 const Page = () => {
@@ -15,9 +15,18 @@ const Page = () => {
     const [ingredients, setIngredients] = useState<string | null>()
     const [howToMake, setHowToMake] = useState<string[] | null>()
     const token = getItemFromLocalStorage("token")
+    var bookmarksNames = getItemFromLocalStorage("bookmarks")
     const router = useRouter()
 
     useEffect(() => {
+        if (bookmarksNames) {
+            var data = bookmarksNames.split(",")
+            if (data.includes(id.toString())) {
+                setClickBookmark(true)
+            } else {
+                false
+            }
+        }
         axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/recipes/${id}`).then(res => {
             console.log(res)
             setName(res.data.name)
@@ -36,7 +45,27 @@ const Page = () => {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
-        }).then(res => console.log(res))
+        }).then(res => {
+            console.log(res)
+            if (res.data === '레시피 저장') {
+                console.log(bookmarksNames)
+                bookmarksNames += "," + id
+                console.log(bookmarksNames)
+                setClickBookmark(true)
+                setItemToLocalStorage("bookmarks", bookmarksNames)
+            } else {
+                var arr = bookmarksNames?.split(",")
+
+                arr = arr?.filter(function (item) {
+                    return item !== id
+                })
+                console.log(arr)
+                bookmarksNames = arr?.join(",")
+                setClickBookmark(false)
+                setItemToLocalStorage("bookmarks", bookmarksNames)
+
+            }
+        })
             .catch(res => {
                 console.log(res)
                 alert("로그인이 필요한 기능입니다!")
@@ -44,6 +73,7 @@ const Page = () => {
             })
         setClickBookmark(prev => !prev)
     }
+
     return (
         <div className='px-5'>
             <div>
